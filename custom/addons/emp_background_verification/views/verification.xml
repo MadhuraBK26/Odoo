@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record model="ir.ui.view" id="verification_form_view">
+			<field name="name">Background Verification</field>
+			<field name="model">emp_verification.emp_verification</field>
+			<field name="arch" type="xml">
+             	<form string="Background_Verification">
+					<header>
+						<button string="Confirm" type="object" name="action_confirm" class="oe_highlight"/>
+                        <field name="stage_id" widget="statusbar" statusbar_visible="draft,submitted,accepted,verification,approved"  clickable="True" track_visibility='always' default='draft' index="True" />
+					</header>
+                    <sheet>
+				        <group>
+							<field name="employee_id"/>
+							<field name="ref_check_list"/>
+							<field name="emp_reference_category"/>
+							<field name="user_id"></field>
+							<field name="was_an_employee"/>
+							<field name="check_residence"/>
+							<field name="check_academic"/>
+							<field name="passport_check"/>
+						</group>
+						<notebook>
+							<page string="Residence details"  attrs="{'invisible':[('check_residence', '=', False)]}">
+								<group>
+									<form>
+										<field name="checklist" domain="[('reference_category', '=', 'Residence')]"/>
+										<field name="house_number" attrs="{'required':[('check_residence', '=', True)]}" />
+										<field name="address_line1"/>
+										<field name="address_line2"/>
+										<field name="state"/>
+										<field name="country"/>
+										<field name="upload_file" filename='file_name'/>
+										<field name="file_name"/>
+								</form>
+								</group>
+							</page>
+                        	<page string="Academic check">
+								<!-- <group>
+									 <field name="qualification_details"/>
+		                        	<field name ="postgraduation" > 
+										<tree> 
+											<field name="university"/>
+											<field name="year_of_passing"/>
+											<field name="college_name"/>
+											<field name="roll_no"/>
+									    	<field name="college_address"/>
+									    	<field name="percentage"/>
+									        <field name="upload_file" filename="file_name"/>
+				                            <field name="file_name" invisible="1"/>  
+			                        	</tree> 
+		                        	</field>
+						    	</group> -->
+						    	<group>
+							    	<field name ="graduation"> 
+										<tree> 
+											<field name="university" required='1'/>
+											<field name="year_of_passing"/>
+											<field name="college_name"/>
+											<field name="roll_no" required='1' />
+									    	<field name="college_address"/>
+									    	<field name="percentage"/>
+									        <field name="upload_file" filename="file_name"/>
+				                            <field name="file_name" invisible="1"/>  
+			                        	</tree> 
+		                        	</field>
+		                        </group>
+                            </page>
+                            <page string="Employment" attrs="{'invisible':[('was_an_employee', '=', False)]}">
+                            	<group string = "Employment Details">
+                            		<field name="employment_details_id">
+	                            		<tree>
+	                            			<field name="emp_checklist" domain="[('reference_category', '=', 'Employment')]"/>
+	                            			<field name="company_address"/>
+	                            			<field name="designation" required='1'/>
+	                            			<field name="ctc"/>
+	                            			<field name="date_of_joining"/>
+	                            			<field name="date_of_relieving"/>
+	                            			<field name="reason"/>
+	                            			<field name="upload_letter"/>
+	                            			<!-- <field name="file_name1" attrs="{'required':[('was_an_employee', '=', True)]}" /> -->
+										</tree>
+										<form>
+											<group>
+												<field name="emp_checklist" domain="[('reference_category', '=', 'Employment')]"/>
+		                            			<field name="company_address"/>
+		                            			<field name="designation" required='1'/>
+		                            			<field name="ctc"/>
+		                            			<field name="date_of_joining"/>
+		                            			<field name="date_of_relieving"/>
+		                            			<field name="reason"/>
+		                            			<field name="upload_letter"/>
+		                            			<field name="file_name1" required="1"/>
+		                            			<!-- <field name="file_name1" attrs="{'required':[('was_an_employee', '=', True)]}" /> -->
+	                            			</group>
+										</form>
+	                            	</field>
+                            	</group>
+                            </page>
+                            <page string="Passport/Visa Details" attrs="{'invisible':[('passport_check', '=', False)]}">
+                            	<group string = "Employment Details">
+                            		<field name="passport_details">
+	                            		<tree>
+	                            			<field name="date_of_issue" attrs="{'required':[('passport_check', '=', True)]}"/>
+	                            			<field name="date_of_expiry" attrs="{'required':[('passport_check', '=', True)]}"/>
+	                            		</tree>
+	                            	</field>
+                            	</group>
+                            </page>
+					    </notebook>
+					</sheet>
+				</form>
+			</field>
+		</record> 
+
+		<!-- <record model="ir.ui.view" id="My_kanban">
+        <field name="name">Kanban</field>
+        <field name="model">emp_verification.emp_verification</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="university"/>
+				<field name="year_of_passing"/>
+				<field name="college_name"/>
+				<field name="roll_no"/>
+		    	<field name="college_address"/>
+		    	<field name="percentage"/>
+		        <field name="upload_file" filename="file_name"/>
+                <field name="file_name" invisible="1"/>  
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_vignette oe_semantic_html_override">
+                            <div class="oe_kanban_details">
+                                <h4>
+                                    <a type="open">
+                                          <field name="university"/>
+                                          <field name="year_of_passing"/>
+										<field name="college_name"/>
+										<field name="roll_no"/>
+								    	<field name="college_address"/>
+								    	<field name="percentage"/> 
+                                    </a>
+                                </h4>
+                                <div name="tags"/>
+                                   <ul>
+                   
+                                   <li> <field name="upload_file"></field></li> 
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+		 -->
+		<record  model="ir.actions.act_window" id="verification_action">
+			<field name="name">Background Verification</field>
+        	<field name="type">ir.actions.act_window</field>
+        	<field name="res_model">emp_verification.emp_verification</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <field name="view_id" ref="verification_form_view"/>
+				<p class="oe_view_nocontent_create"></p>
+          	    </field>
+		    </record>
+
+		<record id="verification_stage_0" model="emp_verification.emp_verification">
+            <field name="sequence">1</field>
+            <field name="name">To Do</field>
+        </record>
+        <record id="verification_stage_1" model="emp_verification.emp_verification">
+            <field name="sequence">10</field>
+            <field name="name">In Progress</field>
+        </record>
+        <record id="verification_stage_2" model="emp_verification.emp_verification">
+            <field name="sequence">20</field>
+            <field name="name">Done</field>
+        </record>
+        <record id="verification_stage_3" model="emp_verification.emp_verification">
+            <field name="sequence">30</field>
+            <field name="name">Cancelled</field>
+        </record>
+
+    	<!-- menu categories -->
+        <menuitem name="Background Verification" action="verification_action" id="background_verification"  groups="base.group_user" parent="emp_background_verification.menu_root"/> 
+    </data>
+</odoo>

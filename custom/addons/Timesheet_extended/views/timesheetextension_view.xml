@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record model="ir.ui.view" id="add_field_product_tree">
+         <field name="company_address">add.field.product.tree</field>
+         <field name="model">hr_timesheet_sheet.sheet</field>
+         <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+         <field name="arch" type="xml">
+          <field name="company_id" position="after">
+            <field name="company_address"/>         
+          </field>
+         </field>
+     </record> 
+       
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_emp_bgv,emp_verification.emp_verification,model_emp_verification_emp_verification,base.group_user,1,1,0,0
+
+access_emp_passport,passport.details,model_passport_details,base.group_user,1,1,1,0
+
+access_emp_graduation,graduation.graduation,model_graduation_graduation,base.group_user,1,1,1,0
+
+access_emp_empdetails,employment.details,model_employment_details,base.group_user,1,1,1,0

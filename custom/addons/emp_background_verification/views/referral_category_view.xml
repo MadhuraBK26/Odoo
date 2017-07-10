@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition 
+
+     <record id="knowledge_action_documents" model="ir.actions.act_window"> 
+    <field name="name">Documents</field>
+    <field name="res_model">ir.attachment</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="context">{'search_default_user_documents': True}</field>
+  </record> -->  
+    <record model="ir.ui.view" id="employee_referral_category">
+      <field name="name">emp_background_verification list</field>
+      <field name="model">referral_category.referral_category</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="ref_category_name"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="BackgroundVerification">
+      <field name="name">emp_background_verification window</field>
+      <field name="res_model">referral_category.referral_category</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record id="referral_category_action" model="ir.actions.act_window">
+      <field name="name">Referral Category</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">referral_category.referral_category</field>
+      <field name="view_mode">tree,form</field>
+      <!-- <field name="context">{'search_default_user_documents': True}</field> -->
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          <!-- Add Text Here -->
+        </p>
+        <p>
+          <!-- More details about what a user can do with this object will be OK -->
+        </p>
+      </field>
+    </record>
+    <menuitem name="Employee Background Verification" id="emp_background_verification.menu_root"   groups="base.group_user"/>
+    
+   
+    <menuitem name="Referral Category" id="emp_background_verification" parent="emp_background_verification.menu_root"
+              action="referral_category_action"/>
+    
+  </data>
+</odoo>
